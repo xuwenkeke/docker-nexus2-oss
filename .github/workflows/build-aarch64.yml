@@ -21,3 +21,6 @@ jobs:
           sudo apt install gh
           gh version
           gh auth login --with-token <<< ${{ secrets.gh_token }}
+
+      - name: Install docker
+        uses: docker-practice/actions-setup-docker@master
