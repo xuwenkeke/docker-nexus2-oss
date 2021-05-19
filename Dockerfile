@@ -19,7 +19,6 @@ RUN apt-get update && \
  java -version
 
 RUN mkdir -vp ${NEXUS_HOME} && \
-  ls -lha ${NEXUS_HOME} /tmp nexus-${NEXUS_VERSION} && \
   curl --fail --silent --location --retry 3 ${NEXUS_DOWNLOAD_URL} | \
   tar xz -C /tmp nexus-${NEXUS_VERSION} && \
   mv /tmp/nexus-${NEXUS_VERSION}/* ${NEXUS_HOME}/ && \
