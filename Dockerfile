@@ -14,7 +14,6 @@ ENV SONATYPE_WORK=/sonatype-work
 ENV NEXUS_HOME=/opt/sonatype/nexus
 
 RUN apt-get update && \
- apt-get -y upgrade && \
  apt-get -y install curl openjdk-8-jdk && \
  java -version
 
