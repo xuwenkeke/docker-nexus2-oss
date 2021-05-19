@@ -13,10 +13,8 @@ ENV NEXUS_HOME=/opt/sonatype/nexus
 
 RUN apt-get update && \
  apt-get -y upgrade && \
- echo 'deb http://ftp.de.debian.org/debian sid main' >> '/etc/apt/sources.list' && \
- apt-get -y update && \
+ apt-get -y install openjdk-8-jdk
  mkdir -p /usr/share/man/man1 && \
- apt-get -y install openjdk-8-jre-headless && \
  java -version
 
 RUN mkdir -p ${NEXUS_HOME} && \
