@@ -13,39 +13,35 @@ jobs:
       - 
         name: Checkout
         uses: actions/checkout@v2        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-
-      - 
-        name: Install gh cli and login
-        run: |
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-          sudo apt-add-repository https://cli.github.com/packages
-          sudo apt update
-          sudo apt install gh
-          gh version
-          gh auth login --with-token <<< ${{ secrets.gh_token }}
-
+#       - 
+#         name: Install gh cli and login
+#         run: |
+#           sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+#           sudo apt-add-repository https://cli.github.com/packages
+#           sudo apt update
+#           sudo apt install gh
+#           gh version
+#           gh auth login --with-token <<< ${{ secrets.gh_token }}
       -
         name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-        
+        uses: docker/setup-qemu-action@v1        
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      
       -
         name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
       -
         name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: ./Dockerfile
           push: true
-          tags: xuwenkeke/sonatype/nexus:oss
+          tags: xuwenkeke/sonatype-nexus2:oss
 
 
 #       - 
