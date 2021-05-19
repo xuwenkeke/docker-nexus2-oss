@@ -28,4 +28,7 @@ jobs:
       - name: Dockerfile build
         run: |
           ls -lah
-          docker buildx build --platform linux/arm64 . 
+          docker buildx build --platform linux/arm64 --tag xuwenkeke/sonatype/nexus:oss . 
+          docker image ls
+          docker run --platform linux/arm6 -d -p 8081:8081 --name nexus xuwenkeke/sonatype/nexus:oss
+          curl -v http://localhost:8081/nexus/service/local/status
