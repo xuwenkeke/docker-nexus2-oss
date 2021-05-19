@@ -13,7 +13,7 @@ ENV NEXUS_HOME=/opt/sonatype/nexus
 
 RUN apt-get update && \
  apt-get -y upgrade && \
- apt-get -y install openjdk-8-jdk
+ apt-get -y install openjdk-8-jdk \
  mkdir -p /usr/share/man/man1 && \
  java -version
 
