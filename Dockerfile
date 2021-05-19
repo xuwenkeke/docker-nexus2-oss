@@ -1,4 +1,6 @@
-FROM debian:buster-slim
+FROM ubuntu:latest
+
+
 
 LABEL vendor=Sonatype \
   maintainer="Sonatype <cloud-ops@sonatype.com>" \
@@ -13,11 +15,11 @@ ENV NEXUS_HOME=/opt/sonatype/nexus
 
 RUN apt-get update && \
  apt-get -y upgrade && \
- apt-get -y install openjdk-8-jdk \
- mkdir -p /usr/share/man/man1 && \
+ apt-get -y install curl openjdk-8-jdk && \
  java -version
 
-RUN mkdir -p ${NEXUS_HOME} && \
+RUN mkdir -vp ${NEXUS_HOME} && \
+  ls -lha ${NEXUS_HOME} /tmp nexus-${NEXUS_VERSION} && \
   curl --fail --silent --location --retry 3 ${NEXUS_DOWNLOAD_URL} | \
   tar xz -C /tmp nexus-${NEXUS_VERSION} && \
   mv /tmp/nexus-${NEXUS_VERSION}/* ${NEXUS_HOME}/ && \
