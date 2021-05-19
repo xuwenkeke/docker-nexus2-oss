@@ -38,4 +38,4 @@ jobs:
         name: Test
         run: |
           docker run -d -p 8081:8081 --name nexus xuwenkeke/sonatype-nexus2:oss
-          curl -v http://localhost:8081/nexus/service/local/status
+          sleep 30 && curl -v http://localhost:8081/nexus/service/local/status
