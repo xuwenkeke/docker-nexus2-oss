@@ -1,17 +1,3 @@
-# Copyright (c) 2014-present Sonatype, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 FROM debian:buster-slim
 
 LABEL vendor=Sonatype \
@@ -25,11 +11,13 @@ ARG NEXUS_DOWNLOAD_URL=https://download.sonatype.com/nexus/oss/nexus-${NEXUS_VER
 ENV SONATYPE_WORK=/sonatype-work
 ENV NEXUS_HOME=/opt/sonatype/nexus
 
-RUN yum install -v -y --disableplugin=subscription-manager hostname java-1.8.0-openjdk-headless \
-  && yum-config-manager --add-repo http://mirror.centos.org/centos/7/os/x86_64/ \
-  && rpm --import http://mirror.centos.org/centos/7/os/x86_64/RPM-GPG-KEY-CentOS-7 \
-  && yum install -v -y createrepo \
-  && yum --disableplugin=subscription-manager clean all
+RUN apt-get update && \
+ apt-get -y upgrade && \
+ echo 'deb http://ftp.de.debian.org/debian sid main' >> '/etc/apt/sources.list' && \
+ apt-get -y update && \
+ mkdir -p /usr/share/man/man1 && \
+ apt-get -y install openjdk-8-jre-headless && \
+ java -version
 
 RUN mkdir -p ${NEXUS_HOME} && \
   curl --fail --silent --location --retry 3 ${NEXUS_DOWNLOAD_URL} | \
