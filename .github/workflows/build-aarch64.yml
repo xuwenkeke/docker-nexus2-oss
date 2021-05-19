@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Nexus2 Docker images
 on:
   push:
     branches: [ main ]
@@ -13,5 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Install gh cli and login
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh
+          gh version
+          gh auth login --with-token <<< ${{ secrets.gh_token }}
