@@ -24,3 +24,8 @@ jobs:
 
       - name: Install docker
         uses: docker-practice/actions-setup-docker@master
+        
+      - name: Dockerfile build
+        run: |
+          ls -lah
+          docker buildx --platform linux/arm64 . 
