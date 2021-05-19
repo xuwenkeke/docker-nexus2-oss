@@ -28,4 +28,4 @@ jobs:
       - name: Dockerfile build
         run: |
           ls -lah
-          docker buildx --platform linux/arm64 . 
+          docker buildx build --platform linux/arm64 . 
