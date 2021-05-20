@@ -2,8 +2,8 @@ name: Build Nexus2 Docker images
 on:
   push:
     branches: [ main ]
-  schedule:
-    - cron:  '0 6 * * *'
+#  schedule:
+#    - cron:  '0 6 * * *'
 
 env:
   DOCKER_HUB_TAG: xuwenkeke/sonatype-nexus2:oss
