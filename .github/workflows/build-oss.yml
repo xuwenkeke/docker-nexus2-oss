@@ -39,5 +39,5 @@ jobs:
       -
         name: Test
         run: |
-          docker run --platform linux/arm64 -d -p 8081:8081 ${{ env.DOCKER_HUB_TAG }}
+          docker run -d -p 8081:8081 ${{ env.DOCKER_HUB_TAG }}
           sleep 30 && curl -v http://localhost:8081/nexus/service/local/status
