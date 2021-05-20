@@ -5,6 +5,8 @@ on:
   schedule:
     - cron:  '0 6 * * *'
 
+env:
+  DOCKER_HUB_TAG: xuwenkeke/npm-sinopia
 
 jobs:
   build:
@@ -33,9 +35,9 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64,linux/arm,linux/arm64
-          tags: xuwenkeke/sonatype-nexus2:oss
+          tags: ${{ env.DOCKER_HUB_TAG }}
       -
         name: Test
         run: |
-          docker run -d -p 8081:8081 --name nexus xuwenkeke/sonatype-nexus2:oss
-          sleep 30 && curl -v http://localhost:8081/nexus/service/local/status
+          docker run -d -p 4873:4873 ${{ env.DOCKER_HUB_TAG }}
+          sleep 30 && curl -v http://localhost:4873/
